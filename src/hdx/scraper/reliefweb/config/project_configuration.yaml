@@ -1,0 +1,43 @@
+# Collector specific configuration
+base_url: "https://api.reliefweb.int/v1/disasters"
+fixed_tags:
+  - climate hazards
+  - climate-weather
+  - drought
+  - earthquake-tsunami
+  - flooding-storm surge
+  - hxl
+  - natural disasters
+hxl_tags:
+  "id": "#meta+id"
+  "name": "#crisis+name"
+  "description": "#description"
+  "status": "#status+name"
+  "glide": "#crisis+code"
+  "primary_country-href": "#country+primary+url"
+  "primary_country-id": "#country+primary+id"
+  "primary_country-name": "#country+primary+name"
+  "primary_country-shortname": "#country+primary+shortname"
+  "primary_country-iso3": "#country+primary+code"
+  "primary_country-location-lat": "#geo+primary+lat"
+  "primary_country-location-lon": "#geo+primary+lon"
+  "primary_type-id": "#cause+primary+type"
+  "primary_type-name": "#cause+primary+name"
+  "primary_type-code": "#cause+primary+code"
+  "country-href": "#country+url"
+  "country-id": "#country+id"
+  "country-name": "#country+name"
+  "country-shortname": "#country+shortname"
+  "country-iso3": "#country+code"
+  "country-location-lat": "#geo+lat"
+  "country-location-lon": "#geo+lon"
+  "type-id": "#cause+type"
+  "type-name": "#cause+name"
+  "type-code": "#cause+code"
+  "url": "#metal+url"
+  "url_alias": "#meta+url+alias"
+  "date-changed": "#date+changed"
+  "date-created": "#date+created"
+  "date-event": "#date+event"
+  "current": "#status+current"
+  "description-html": "#description+html"
