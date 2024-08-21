@@ -53,6 +53,7 @@ class ReliefWeb:
         for disaster in disaster_list:
             disaster_url = disaster["href"]
 
+            disaster_data = None
             try:
                 disaster_data = self._retriever.download_json(disaster_url)
             except Exception as e:

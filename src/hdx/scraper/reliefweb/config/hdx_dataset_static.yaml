@@ -1,6 +1,6 @@
 license_id: "cc-by"
 methodology: "Registry"
-dataset_source: "ReliefWeb"
+dataset_source: "Multiple sources"
 package_creator: "HDX Data Systems Team"
 private: False
 maintainer: "ab54dbbf-b25c-4c31-8bda-778ad2f39328" # Adrian Ciancio
@@ -10,4 +10,4 @@ data_update_frequency: 7 #  Weekly
 notes: |
   ReliefWeb is a humanitarian information service provided by the United Nations Office for the Coordination of Humanitarian Affairs (OCHA). ReliefWeb's editorial team monitors and collects information from more than 4,000 key sources, including humanitarian agencies at the international and local levels, governments, think-tanks and research institutions, and the media.
 
-  ReliefWeb disaster dataset provides an overview of the situation and situation reports, news and press releases, assessments, evaluations, infographics and maps of natural disasters with humanitarian impact from 1981 until today.
+  [ReliefWeb disaster dataset](https://reliefweb.int/disasters) provides an overview of the situation and situation reports, news and press releases, assessments, evaluations, infographics and maps of natural disasters with humanitarian impact from 1981 until today.
