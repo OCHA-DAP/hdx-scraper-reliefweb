@@ -32,7 +32,7 @@ def expected_dataset():
     return {
         "data_update_frequency": 7,
         "dataset_date": "[2015-08-03T00:00:00 TO 2015-08-07T23:59:59]",
-        "dataset_source": "ReliefWeb",
+        "dataset_source": "Multiple sources",
         "groups": [{"name": "world"}],
         "license_id": "cc-by",
         "maintainer": "ab54dbbf-b25c-4c31-8bda-778ad2f39328",
