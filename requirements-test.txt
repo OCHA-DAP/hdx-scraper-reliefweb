@@ -298,7 +298,7 @@ ruamel-yaml-clib==0.2.8
     # via
     #   -c requirements.txt
     #   ruamel-yaml
-setuptools==72.2.0
+setuptools==73.0.1
     # via
     #   -c requirements.txt
     #   ckanapi
@@ -310,7 +310,7 @@ simpleeval==0.9.13
     # via
     #   -c requirements.txt
     #   frictionless
-simplejson==3.19.2
+simplejson==3.19.3
     # via
     #   -c requirements.txt
     #   ckanapi
@@ -350,7 +350,7 @@ typeguard==4.3.0
     # via
     #   -c requirements.txt
     #   inflect
-typer==0.12.3
+typer==0.12.4
     # via
     #   -c requirements.txt
     #   frictionless
