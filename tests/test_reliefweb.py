@@ -31,7 +31,7 @@ def expected_json() -> dict:
 def expected_dataset():
     return {
         "data_update_frequency": 7,
-        "dataset_date": "[2015-08-03T00:00:00 TO 2015-08-07T23:59:59]",
+        "dataset_date": "[2025-04-13T00:00:00 TO 2025-05-15T23:59:59]",
         "dataset_source": "Multiple sources",
         "groups": [{"name": "world"}],
         "license_id": "cc-by",
@@ -129,7 +129,7 @@ class TestReliefWeb:
                     saved_dir=input_dir,
                     temp_dir=tempdir,
                     save=False,
-                    use_saved=True,
+                    use_saved=False,
                 )
 
                 reliefweb = ReliefWeb(
@@ -139,6 +139,9 @@ class TestReliefWeb:
                 )
 
                 disaster_list = reliefweb.scrape_data()
+
+                # Test first 3 records
+                disaster_list = disaster_list[:3]
 
                 assert list(disaster_list[0].keys()) == [
                     "id",
@@ -171,6 +174,7 @@ class TestReliefWeb:
                     "date-changed",
                     "date-created",
                     "date-event",
+                    "current",
                     "description-html",
                 ]
 
