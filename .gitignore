@@ -48,6 +48,7 @@ coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
+tests/*.log
 .pytest_cache/
 cover/
 
@@ -161,12 +162,16 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+# VS Code
+.vscode/settings.json
+
 ## Project
 
-# Saved data for this project
+# Directory where the scraper caches data
 saved_data/
 
 # Version file
-src/hdx/scraper/iom/_version.py
+**/_version.py
 
+# Mac files
 .DS_Store

@@ -1,33 +1,30 @@
-import logging
-from typing import List, Optional
+#!/usr/bin/python
+"""Reliefweb scraper"""
 
-from slugify import slugify
+import logging
+from typing import Optional
 
 from hdx.api.configuration import Configuration
 from hdx.data.dataset import Dataset
 from hdx.utilities.retriever import Retrieve
+from slugify import slugify
 
 logger = logging.getLogger(__name__)
 
 
-class ReliefWeb:
-    _APP_NAME = "vocabulary"
-    _DATE_FIELD = "date-event"
-    _FILENAME = "reliefweb-disasters-list.csv"
-    _LIMIT = 1000
-    _LOCATION = "world"
-    _PRESET = "external"
-
-    def __init__(
-        self, configuration: Configuration, retriever: Retrieve, temp_dir: str
-    ):
+class Pipeline:
+    def __init__(self, configuration: Configuration, retriever: Retrieve, tempdir: str):
         self._configuration = configuration
         self._retriever = retriever
-        self._temp_dir = temp_dir
-        self._tags = self._create_tags()
-        self._hxl_tags = self._create_hxl_tags()
+        self._tempdir = tempdir
+        self._APP_NAME = "vocabulary"
+        self._DATE_FIELD = "date-event"
+        self._FILENAME = "reliefweb-disasters-list.csv"
+        self._LIMIT = 1000
+        self._LOCATION = "world"
+        self._PRESET = "external"
 
-    def scrape_data(self) -> list:
+    def scrape_data(self, max_items: Optional[int] = None) -> list:
         """
         Query the API and store the results in a list.
 
@@ -45,9 +42,13 @@ class ReliefWeb:
         }
         """
         logger.info("Scraping data")
-        data_url = f"{self._configuration["base_url"]}?appname={self._APP_NAME}&preset={self._PRESET}&limit={self._LIMIT}"
+        data_url = f"{self._configuration['base_url']}?appname={self._APP_NAME}&preset={self._PRESET}&limit={self._LIMIT}"
         data = self._retriever.download_json(data_url)
         disaster_list = data["data"]
+
+        # Use for testing
+        if max_items is not None:
+            disaster_list = disaster_list[:max_items]
 
         disasters_list = []
         for disaster in disaster_list:
@@ -58,9 +59,7 @@ class ReliefWeb:
                 disaster_data = self._retriever.download_json(disaster_url)
             except Exception as e:
                 if "404" in str(e):
-                    logger.info(
-                        f"404 error for {disaster['fields']['name']}: {e}"
-                    )
+                    logger.info(f"404 error for {disaster['fields']['name']}: {e}")
                 else:
                     logger.error(
                         f"Error downloading data for {disaster['fields']['name']}: {e}"
@@ -107,7 +106,7 @@ class ReliefWeb:
         )
 
         dataset.add_other_location(self._LOCATION)
-        dataset.add_tags(self._tags)
+        dataset.add_tags(self._configuration["tags"])
 
         resource_data = {
             "name": self._FILENAME,
@@ -117,8 +116,8 @@ class ReliefWeb:
         dataset.generate_resource_from_iterable(
             list(disaster_list[0].keys()),
             disaster_list,
-            self._hxl_tags,
-            self._temp_dir,
+            {},
+            self._tempdir,
             self._FILENAME,
             resource_data,
             self._DATE_FIELD,
@@ -126,16 +125,6 @@ class ReliefWeb:
         )
 
         return dataset
-
-    def _create_tags(self) -> List[str]:
-        logger.info("Generating tags")
-        tags = self._configuration["fixed_tags"]
-        return tags
-
-    def _create_hxl_tags(self) -> List[str]:
-        logger.info("Generating hxl tags")
-        hxl_tags = self._configuration["hxl_tags"]
-        return hxl_tags
 
 
 def _format_data(data: dict) -> dict:

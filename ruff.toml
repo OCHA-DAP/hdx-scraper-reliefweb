@@ -1,4 +1,3 @@
-line-length = 79
 exclude = ["_version.py"]
 
 [lint]
@@ -13,4 +12,5 @@ ignore = [
 ]
 
 [lint.isort]
-known-local-folder = ["hdx"]
+known-local-folder = ["hdx.scraper.reliefweb"]
+known-third-party = ["hdx.api", "hdx.location", "hdx.data", "hdx.database", "hdx.facades", "hdx.scraper", "hdx.utilities"]
