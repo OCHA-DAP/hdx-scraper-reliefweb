@@ -60,7 +60,6 @@ class TestPipeline:
                     "date-created",
                     "date-event",
                     "current",
-                    "description-html",
                 ]
 
                 dataset = pipeline.generate_dataset(disaster_list=disaster_list[:3])

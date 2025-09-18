@@ -27,7 +27,7 @@ ckanapi==4.8
     # via
     #   -c requirements.txt
     #   hdx-python-api
-click==8.2.1
+click==8.3.0
     # via
     #   -c requirements.txt
     #   typer
@@ -46,7 +46,7 @@ docopt==0.6.2
     #   -c requirements.txt
     #   ckanapi
     #   num2words
-docutils==0.22
+docutils==0.22.1
     # via
     #   -c requirements.txt
     #   defopt
@@ -210,6 +210,10 @@ python-dateutil==2.9.0.post0
     #   frictionless
     #   hdx-python-utilities
     #   libhxl
+python-dotenv==1.1.1
+    # via
+    #   -c requirements.txt
+    #   hdx-scraper-reliefweb (pyproject.toml)
 python-io-wrapper==0.3.1
     # via
     #   -c requirements.txt
@@ -368,7 +372,7 @@ xlsx2csv==0.8.4
     # via
     #   -c requirements.txt
     #   hdx-python-utilities
-xlsxwriter==3.2.8
+xlsxwriter==3.2.9
     # via
     #   -c requirements.txt
     #   tableschema-to-template

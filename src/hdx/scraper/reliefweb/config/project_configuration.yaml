@@ -1,5 +1,5 @@
 # Collector specific configuration
-base_url: "https://api.reliefweb.int/v1/disasters"
+base_url: "https://api.reliefweb.int/v2/disasters"
 tags:
   - climate hazards
   - climate-weather
