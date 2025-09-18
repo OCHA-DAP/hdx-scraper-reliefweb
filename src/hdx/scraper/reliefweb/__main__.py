@@ -29,13 +29,9 @@ _LOOKUP = "hdx-scraper-reliefweb"
 _SAVED_DATA_DIR = "saved_data"  # Keep in repo to avoid deletion in /tmp
 _UPDATED_BY_SCRIPT = "HDX Scraper: Reliefweb"
 
-load_dotenv(override=True)
-
-
-def is_bool_env(env: str) -> bool:
-    """Check if env is a boolean."""
-    return env.lower() in ("true", "yes", "on", "1")
-
+# Load local .env file if not running in GitHub Actions
+if getenv("GITHUB_ACTIONS") is None:
+    load_dotenv()
 
 APPNAME = getenv("APPNAME")
 if not APPNAME:
@@ -44,7 +40,7 @@ if not APPNAME:
 
 def main(
     save: bool = False,
-    use_saved: bool = True,
+    use_saved: bool = False,
 ) -> None:
     """Generate datasets and create them in HDX
 
