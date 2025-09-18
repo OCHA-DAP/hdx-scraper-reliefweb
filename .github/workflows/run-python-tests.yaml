@@ -33,6 +33,8 @@ jobs:
     - name: Install Hatch
       uses: pypa/hatch@install
     - name: Test with hatch/pytest
+      env:
+        APPNAME: ${{ secrets.APPNAME }}
       run: |
         hatch test
     - name: Check styling
