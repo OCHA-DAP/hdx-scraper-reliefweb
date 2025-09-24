@@ -13,16 +13,22 @@ logger = logging.getLogger(__name__)
 
 
 class Pipeline:
-    def __init__(self, configuration: Configuration, retriever: Retrieve, tempdir: str):
+    def __init__(
+        self,
+        configuration: Configuration,
+        retriever: Retrieve,
+        tempdir: str,
+        appname: str,
+    ):
         self._configuration = configuration
         self._retriever = retriever
         self._tempdir = tempdir
-        self._APP_NAME = "vocabulary"
+        self._APPNAME = appname
         self._DATE_FIELD = "date-event"
         self._FILENAME = "reliefweb-disasters-list.csv"
         self._LIMIT = 1000
+        self._OFFSET = 0
         self._LOCATION = "world"
-        self._PRESET = "external"
 
     def scrape_data(self, max_items: Optional[int] = None) -> list:
         """
@@ -33,25 +39,36 @@ class Pipeline:
             "id": "52108",
             "score": 1,
             "fields": {
-                "id": 52108,
-                "name": "Chad: Floods - Aug 2024",
-                "status": "ongoing",
-                "glide": "FL-2024-000139-TCD"
+                "name": "Chad: Floods - Aug 2024"
             },
-            "href": "https://api.reliefweb.int/v1/disasters/52108"
+            "href": "https://api.reliefweb.int/v2/disasters/52108"
         }
         """
         logger.info("Scraping data")
-        data_url = f"{self._configuration['base_url']}?appname={self._APP_NAME}&preset={self._PRESET}&limit={self._LIMIT}"
+        disasters_data = []
+
+        data_url = f"{self._configuration['base_url']}?appname={self._APPNAME}&limit={self._LIMIT}&offset={self._OFFSET}"
         data = self._retriever.download_json(data_url)
-        disaster_list = data["data"]
+
+        total_count = data.get("totalCount", 0)
+        if max_items is not None:
+            total_count = min(max_items, total_count)
+
+        disasters_data.extend(data.get("data", []))
+
+        # Get all records
+        while len(disasters_data) < total_count:
+            self._OFFSET += self._LIMIT
+            data_url = f"{self._configuration['base_url']}?appname={self._APPNAME}&limit={self._LIMIT}&offset={self._OFFSET}"
+            data = self._retriever.download_json(data_url)
+            disasters_data.extend(data.get("data", []))
 
         # Use for testing
         if max_items is not None:
-            disaster_list = disaster_list[:max_items]
+            disasters_data = disasters_data[:max_items]
 
         disasters_list = []
-        for disaster in disaster_list:
+        for disaster in disasters_data:
             disaster_url = disaster["href"]
 
             disaster_data = None
@@ -78,6 +95,7 @@ class Pipeline:
                 "uuid",
                 "type-primary",
                 "country-primary",
+                "description-html",
                 "profile-overview",
                 "profile-overview-html",
             ]

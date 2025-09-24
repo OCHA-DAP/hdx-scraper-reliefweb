@@ -6,9 +6,12 @@ script then creates in HDX.
 """
 
 import logging
+from os import getenv
 from os.path import expanduser, join
 
+from dotenv import load_dotenv
 from hdx.api.configuration import Configuration
+from hdx.data.user import User
 from hdx.facades.infer_arguments import facade
 from hdx.utilities.downloader import Download
 from hdx.utilities.path import (
@@ -26,6 +29,14 @@ _LOOKUP = "hdx-scraper-reliefweb"
 _SAVED_DATA_DIR = "saved_data"  # Keep in repo to avoid deletion in /tmp
 _UPDATED_BY_SCRIPT = "HDX Scraper: Reliefweb"
 
+# Load local .env file if not running in GitHub Actions
+if getenv("GITHUB_ACTIONS") is None:
+    load_dotenv()
+
+APP_NAME = getenv("APP_NAME")
+if not APP_NAME:
+    logger.error("APP_NAME environment variable is missing.")
+
 
 def main(
     save: bool = False,
@@ -42,7 +53,7 @@ def main(
     """
     logger.info(f"##### {_LOOKUP} version {__version__} ####")
     configuration = Configuration.read()
-    # User.check_current_user_write_access("")
+    User.check_current_user_write_access("hdx")
 
     with wheretostart_tempdir_batch(folder=_LOOKUP) as info:
         tempdir = info["folder"]
@@ -55,7 +66,7 @@ def main(
                 save=save,
                 use_saved=use_saved,
             )
-            pipeline = Pipeline(configuration, retriever, tempdir)
+            pipeline = Pipeline(configuration, retriever, tempdir, APP_NAME)
             #
             # Steps to generate dataset
             #

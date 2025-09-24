@@ -1,5 +1,7 @@
+from os import getenv
 from os.path import join
 
+from dotenv import load_dotenv
 from hdx.utilities.compare import assert_files_same
 from hdx.utilities.downloader import Download
 from hdx.utilities.path import temp_dir
@@ -7,9 +9,15 @@ from hdx.utilities.retriever import Retrieve
 
 from hdx.scraper.reliefweb.pipeline import Pipeline
 
+# Load local .env file if not running in GitHub Actions
+if getenv("GITHUB_ACTIONS") is None:
+    load_dotenv()
+
 
 class TestPipeline:
     def test_pipeline(self, configuration, fixtures_dir, input_dir, config_dir):
+        APP_NAME = getenv("APP_NAME")
+
         with temp_dir(
             "TestReliefweb",
             delete_on_success=True,
@@ -24,7 +32,7 @@ class TestPipeline:
                     save=False,
                     use_saved=True,
                 )
-                pipeline = Pipeline(configuration, retriever, tempdir)
+                pipeline = Pipeline(configuration, retriever, tempdir, APP_NAME)
                 # Use the first 3 records for testing
                 disaster_list = pipeline.scrape_data(3)
 
@@ -60,7 +68,6 @@ class TestPipeline:
                     "date-created",
                     "date-event",
                     "current",
-                    "description-html",
                 ]
 
                 dataset = pipeline.generate_dataset(disaster_list=disaster_list[:3])
