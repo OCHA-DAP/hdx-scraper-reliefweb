@@ -110,10 +110,6 @@ class TestPipeline:
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
-                            "name": "hxl",
-                            "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
-                        },
-                        {
                             "name": "natural disasters",
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
@@ -124,7 +120,7 @@ class TestPipeline:
                 resources = dataset.get_resources()
                 assert resources == [
                     {
-                        "description": "CSV with HXL tags of ongoing and past disasters covered by ReliefWeb",
+                        "description": "CSV containing data on ongoing and past disasters covered by ReliefWeb",
                         "format": "csv",
                         "name": "reliefweb-disasters-list.csv",
                     }
