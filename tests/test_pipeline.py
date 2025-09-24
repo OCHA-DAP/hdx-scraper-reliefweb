@@ -16,7 +16,7 @@ if getenv("GITHUB_ACTIONS") is None:
 
 class TestPipeline:
     def test_pipeline(self, configuration, fixtures_dir, input_dir, config_dir):
-        APPNAME = getenv("APPNAME")
+        APP_NAME = getenv("APP_NAME")
 
         with temp_dir(
             "TestReliefweb",
@@ -32,7 +32,7 @@ class TestPipeline:
                     save=False,
                     use_saved=True,
                 )
-                pipeline = Pipeline(configuration, retriever, tempdir, APPNAME)
+                pipeline = Pipeline(configuration, retriever, tempdir, APP_NAME)
                 # Use the first 3 records for testing
                 disaster_list = pipeline.scrape_data(3)
 

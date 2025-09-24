@@ -34,7 +34,7 @@ jobs:
       uses: pypa/hatch@install
     - name: Test with hatch/pytest
       env:
-        APPNAME: ${{ secrets.APPNAME }}
+        APP_NAME: ${{ vars.APP_NAME }}
       run: |
         hatch test
     - name: Check styling

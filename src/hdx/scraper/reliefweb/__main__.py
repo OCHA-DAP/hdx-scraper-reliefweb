@@ -33,9 +33,9 @@ _UPDATED_BY_SCRIPT = "HDX Scraper: Reliefweb"
 if getenv("GITHUB_ACTIONS") is None:
     load_dotenv()
 
-APPNAME = getenv("APPNAME")
-if not APPNAME:
-    logger.error("APPNAME environment variable is missing.")
+APP_NAME = getenv("APP_NAME")
+if not APP_NAME:
+    logger.error("APP_NAME environment variable is missing.")
 
 
 def main(
@@ -66,7 +66,7 @@ def main(
                 save=save,
                 use_saved=use_saved,
             )
-            pipeline = Pipeline(configuration, retriever, tempdir, APPNAME)
+            pipeline = Pipeline(configuration, retriever, tempdir, APP_NAME)
             #
             # Steps to generate dataset
             #
