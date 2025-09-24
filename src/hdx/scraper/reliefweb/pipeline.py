@@ -128,7 +128,7 @@ class Pipeline:
 
         resource_data = {
             "name": self._FILENAME,
-            "description": "CSV with HXL tags of ongoing and past disasters covered by ReliefWeb",
+            "description": "CSV containing data on ongoing and past disasters covered by ReliefWeb",
         }
 
         dataset.generate_resource_from_iterable(
