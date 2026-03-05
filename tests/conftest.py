@@ -48,7 +48,6 @@ def configuration(config_dir):
                 "drought",
                 "earthquake-tsunami",
                 "flooding",
-                "hxl",
                 "natural disasters",
             )
         ],

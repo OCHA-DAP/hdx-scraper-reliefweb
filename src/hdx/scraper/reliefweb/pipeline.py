@@ -131,15 +131,13 @@ class Pipeline:
             "description": "CSV containing data on ongoing and past disasters covered by ReliefWeb",
         }
 
-        dataset.generate_resource_from_iterable(
-            list(disaster_list[0].keys()),
-            disaster_list,
-            {},
+        dataset.generate_resource(
             self._tempdir,
             self._FILENAME,
+            disaster_list,
             resource_data,
-            self._DATE_FIELD,
-            quickcharts=None,
+            list(disaster_list[0].keys()),
+            datecol=self._DATE_FIELD,
         )
 
         return dataset
