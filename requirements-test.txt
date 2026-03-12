@@ -19,11 +19,11 @@ certifi==2026.2.25
     # via
     #   -c requirements.txt
     #   requests
-chardet==7.0.1
+chardet==7.1.0
     # via
     #   -c requirements.txt
     #   frictionless
-charset-normalizer==3.4.4
+charset-normalizer==3.4.5
     # via
     #   -c requirements.txt
     #   requests
@@ -237,7 +237,7 @@ ruamel-yaml==0.19.1
     # via
     #   -c requirements.txt
     #   hdx-python-utilities
-setuptools==82.0.0
+setuptools==82.0.1
     # via
     #   -c requirements.txt
     #   ckanapi
@@ -245,7 +245,7 @@ shellingham==1.5.4
     # via
     #   -c requirements.txt
     #   typer
-simpleeval==1.0.3
+simpleeval==1.0.4
     # via
     #   -c requirements.txt
     #   frictionless
