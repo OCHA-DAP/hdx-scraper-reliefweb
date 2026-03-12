@@ -103,6 +103,10 @@ class Pipeline:
             for key in remove_keys:
                 disaster_fields.pop(key, None)
 
+            for key, value in disaster_fields.items():
+                if key.endswith("-href") and isinstance(value, str):
+                    disaster_fields[key] = value.split("?")[0]
+
             disasters_list.append(disaster_fields)
 
         return disasters_list
