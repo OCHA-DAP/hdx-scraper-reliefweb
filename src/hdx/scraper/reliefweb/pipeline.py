@@ -47,7 +47,8 @@ class Pipeline:
         logger.info("Scraping data")
         disasters_data = []
 
-        data_url = f"{self._configuration['base_url']}?appname={self._APPNAME}&limit={self._LIMIT}&offset={self._OFFSET}"
+        offset = 0
+        data_url = f"{self._configuration['base_url']}?appname={self._APPNAME}&limit={self._LIMIT}&offset={offset}"
         data = self._retriever.download_json(data_url)
 
         total_count = data.get("totalCount", 0)
@@ -58,8 +59,8 @@ class Pipeline:
 
         # Get all records
         while len(disasters_data) < total_count:
-            self._OFFSET += self._LIMIT
-            data_url = f"{self._configuration['base_url']}?appname={self._APPNAME}&limit={self._LIMIT}&offset={self._OFFSET}"
+            offset += self._LIMIT
+            data_url = f"{self._configuration['base_url']}?appname={self._APPNAME}&limit={self._LIMIT}&offset={offset}"
             data = self._retriever.download_json(data_url)
             disasters_data.extend(data.get("data", []))
 
@@ -69,7 +70,7 @@ class Pipeline:
 
         disasters_list = []
         for disaster in disasters_data:
-            disaster_url = disaster["href"]
+            disaster_url = f"{disaster['href']}?appname={self._APPNAME}"
 
             disaster_data = None
             try:
