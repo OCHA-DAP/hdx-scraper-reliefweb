@@ -80,7 +80,7 @@ class TestPipeline:
                     "dataset_source": "Multiple sources",
                     "groups": [{"name": "world"}],
                     "license_id": "cc-by",
-                    "maintainer": "ab54dbbf-b25c-4c31-8bda-778ad2f39328",
+                    "maintainer": "61f770b9-e26a-4feb-b5c2-74c8de1b8963",
                     "methodology": "Registry",
                     "name": "reliefweb-disasters-list",
                     "notes": "ReliefWeb is a humanitarian information service provided by the United Nations Office for the Coordination of Humanitarian Affairs (OCHA). ReliefWeb's editorial team monitors and collects information from more than 4,000 key sources, including humanitarian agencies at the international and local levels, governments, think-tanks and research institutions, and the media.\n\n[ReliefWeb disaster dataset](https://reliefweb.int/disasters) provides an overview of the situation and situation reports, news and press releases, assessments, evaluations, infographics and maps of natural disasters with humanitarian impact from 1981 until today.\n",

@@ -3,8 +3,8 @@ methodology: "Registry"
 dataset_source: "Multiple sources"
 package_creator: "HDX Data Systems Team"
 private: False
-maintainer: "ab54dbbf-b25c-4c31-8bda-778ad2f39328" # Adrian Ciancio
-owner_org: "de410fc7-6116-4283-9c26-67287aaa2634" # ReliefWeb
+maintainer: "61f770b9-e26a-4feb-b5c2-74c8de1b8963"
+owner_org: "de410fc7-6116-4283-9c26-67287aaa2634"
 subnational: False
 data_update_frequency: 7
 notes: |
